@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="style1.css">
+  <title>NIVEL 1</title>
+  <link rel="icon" type="image/jpg" href="images/Nivel 1.png"/>
+  <script src="apps\app.js" charset="utf-8"></script>
+</head>
+<body class="no-copiable">
+<h1 onload="init()">
+  <ul class="circles">
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+</ul>
+<h1 class="punt">PUNTUACIÓN ACTUAL:<span id="result"></span></h1>
+  <h1 class="header">
+    <script>
+      var text = "NIVEL 1"
+      var speed = 40   
+      if (document.all || document.getElementById) {
+          document.write('<span id="highlight">' + text + '</span>')
+          var storetext = document.getElementById ? document.getElementById("highlight") : document.all.highlight
+      } else
+          document.write(text)
+      var hex = new Array("00", "14", "28", "3C", "50", "64", "78", "8C", "A0", "B4", "C8", "DC", "F0")
+      var r = 1
+      var g = 1
+      var b = 1
+      var seq = 1
+
+      function changetext() {
+          rainbow = "#" + hex[r] + hex[g] + hex[b]
+          storetext.style.color = rainbow
+      }
+
+      function change() {
+          if (seq == 6) {
+              b--
+              if (b == 0)
+                  seq = 1
+          }
+          if (seq == 5) {
+              r++
+              if (r == 12)
+                  seq = 6
+          }
+          if (seq == 4) {
+              g--
+              if (g == 0)
+                  seq = 5
+          }
+          if (seq == 3) {
+              b++
+              if (b == 12)
+                  seq = 4
+          }
+          if (seq == 2) {
+              r--
+              if (r == 0)
+                  seq = 3
+          }
+          if (seq == 1) {
+              g++
+              if (g == 12)
+                  seq = 2
+          }
+          changetext()
+      }
+
+      function starteffect() {
+          if (document.all || document.getElementById)
+              flash = setInterval(change, speed) // Cambié "change()" por "change"
+      }
+      starteffect();
+    </script>
+  </h1>
+  <div class="header">
+    <audio autoplay loop>
+      <source src="Musica/Arcadia.mp3" type="audio/mpeg">
+
+      Tu navegador no soporta la etiqueta de audio.
+    </audio>
+  </div>
+ 
+  <br><br><br><br>
+  <div class="grid"></div>
+  <div id="overlay"></div>
+  <div class="Timer">
+    <div id="temporizador">
+      <script>
+      var tiempoRestante = 80; // Tiempo inicial en segundos
+      var timer; // Variable global para el temporizador
+
+      function iniciarTemporizador(segundos) {
+        const tiempoInicial = Date.now();
+        const tiempoFinal = tiempoInicial + segundos * 1000; 
+        timer = setInterval(function() {
+          const ahora = Date.now();
+          tiempoRestante = Math.round((tiempoFinal - ahora) / 1000);
+          if (tiempoRestante < 0) {
+            clearInterval(timer);
+            document.getElementById('temporizador').innerHTML = '¡Tiempo terminado!';
+            // Recarga la página después de 3 segundos (puedes ajustar este tiempo)
+            setTimeout(function() {
+              alert("SE REGRESARA AL INICIO");
+              window.location.href = "./Inicio.html";; // O redirige a otra página: location.href = 'tu_pagina.html';
+            }, 3000);
+          } else {
+            document.getElementById('temporizador').innerHTML = 'Tiempo: ' + tiempoRestante + ' segundos';
+          }
+        }, 1000);
+      }
+      function agregarTiempo(segundos) {
+        tiempoRestante += segundos; // Agrega la cantidad de segundos indicada
+        document.getElementById('temporizador').innerHTML = 'Tiempo: ' + tiempoRestante + ' segundos';
+        // Reinicia el temporizador con el nuevo tiempo
+        clearInterval(timer);
+        iniciarTemporizador(tiempoRestante);
+      }
+      iniciarTemporizador(tiempoRestante);
+      </script>
+    </div>
+  </div>
+      <style>
+        .boton-dinamico {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 20px;
+            bottom: 30px;
+            right: 10px;
+            font-family: Verdana;
+            border-radius: 100px;
+            position: fixed;           
+            background-color: rgb(0, 0, 0); /* Color inicial del botón */
+            color: white;
+            cursor: pointer;
+            transition: 1s ease; /* Transición suave */
+            box-shadow: 0px 20px 20px rgba(0, 0, 0, 0.322);
+            width: 200px;
+            height: 70px;
+        }
+    </style>
+      <button id="miBoton" class="boton-dinamico">MENÚ DE INICIO</button>
+      <script>      
+        var boton = document.getElementById("miBoton");
+        document.getElementById("miBoton").addEventListener("click", function() {
+        window.location.href = "Inicio.html";
+        });
+        boton.addEventListener("mouseover", function() {
+                boton.style.transition = 'background-color 0.5s, width 0.5s, height 0.5s';
+                boton.style.backgroundColor = "white"; 
+                boton.style.width = '220px';
+                boton.style.height = '80px';
+                boton.style.color = 'black'
+        });
+
+        boton.addEventListener("mouseout", function() {
+                boton.style.transition = 'background-color 0.5s, width 0.5s, height 0.5s';
+                boton.style.backgroundColor = "black"; 
+                boton.style.width = '200px'; 
+                boton.style.height = '70px'; 
+                boton.style.color = 'white'
+        });
+    </script>
+    </div>
+    
+      <div id="popup">
+        <div class="trivia">Trivia para tiempo extra</div>
+          <div id="pregunta">
+            <h2><p id="texto-pregunta"></p></h2>
+            <input type="text" id="respuesta" placeholder="Respuesta">
+            <button onclick="verificarRespuesta()">ENVIAR</button>
+          </div>
+      </div>
+
+
+  <script>
+    var preguntasYRespuestas = [
+        {
+            pregunta: "Es la base para varios modelos numéricos fundamentales.",
+            respuestas: ["Interpolación", "1750", "1802", "1901"]
+        },
+        {
+          pregunta: "¿En qué año nació Isaac Newton?",
+            respuestas: ["1642", "1750", "1802", "1901"]
+        },
+        {
+          pregunta: "La interpolación de Newton es más exacto que la de Lagrange",
+            respuestas: ["Falso", "1750", "1802", "1901"]
+        },
+        {
+          pregunta: "Se aplica cuando los intervalos son no uniformes",
+            respuestas: ["Diferencias divididas", "1750", "1802", "1901"]
+        },
+        {
+          pregunta: "Se utiliza para cuando los datos tienen errores sustanciales",
+            respuestas: ["Mínimos cuadrados", "1750", "1802", "1901"]
+        },
+        {
+          pregunta: "[Cúbica] ¿Es un tipo de ajuste de mínimos cuadrados?",
+            respuestas: ["Verdadero", "1750", "1802", "1901"]
+        },
+        {
+          pregunta: "[Cuadrática] ¿Es un tipo de ajuste de mínimos cuadrados?",
+            respuestas: ["Verdadero", "1750", "1802", "1901"]
+        },
+        {
+          pregunta: "¿En qué año nació Joseph-Louis Lagrange?",
+            respuestas: ["1736", "1750", "1802", "1901"]
+        },
+        {
+          pregunta: "¿Es un método abierto que emplea una fórmula para predecir la raíz de una función?",
+            respuestas: ["Punto fijo", "1750", "1802", "1901"]
+        },
+        {
+          pregunta: "¿Que margen de error es el óptimo para una ecuación resuelta con el método de Bisectriz?",
+            respuestas: ["0.001", "1750", "1802", "1901"]
+        },
+        // Agrega más preguntas y respuestas según sea necesario
+    ];
+
+    var preguntaActual; // Almacena la pregunta actual
+
+    // Función para obtener una pregunta y respuestas aleatorias
+    function obtenerPreguntaYRespuestasAleatorias() {
+        var indice = Math.floor(Math.random() * preguntasYRespuestas.length);
+        preguntaActual = preguntasYRespuestas[indice];
+        return preguntaActual;
+    }
+
+    // Función para mostrar una nueva pregunta al cargar la página
+    document.addEventListener("DOMContentLoaded", function () {
+        mostrarNuevaPregunta();
+    });
+
+    // Función para mostrar una nueva pregunta
+    function mostrarNuevaPregunta() {
+        var pregunta = obtenerPreguntaYRespuestasAleatorias();
+        document.getElementById("texto-pregunta").innerText = pregunta.pregunta;
+    }
+
+    // Función para verificar la respuesta
+    function verificarRespuesta() {
+        var respuestaUsuario = document.getElementById("respuesta").value.toLowerCase();
+        var respuestaCorrecta = preguntaActual.respuestas[0].toLowerCase();
+
+        if (respuestaUsuario === respuestaCorrecta) {
+            alert("Respuesta correcta, se salva del pagerefresh y se agregarán 15 segundos a su contador");
+            agregarTiempo(15); // Agrega 15 segundos al temporizador
+        } else {
+            alert("Respuesta incorrecta. La página se refrescará y el nivel se reiniciará.");
+            clearInterval(timer); // Detén el temporizador
+            setTimeout(function() {
+              location.reload(); // Recarga la página después de unos segundos
+            }, 1000);
+        }
+
+        // Muestra una nueva pregunta después de verificar la respuesta
+        mostrarNuevaPregunta();
+        document.getElementById("respuesta").value = ""; // Limpia el campo de respuesta
+    }
+  </script>
+  
+</body>
+</html>
