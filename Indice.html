@@ -112,7 +112,7 @@
             // Recarga la página después de 3 segundos (puedes ajustar este tiempo)
             setTimeout(function() {
               alert("SE REGRESARA AL INICIO");
-              window.location.href = "./Inicio.html";; // O redirige a otra página: location.href = 'tu_pagina.html';
+              window.location.href = "./Index.html";; // O redirige a otra página: location.href = 'tu_pagina.html';
             }, 3000);
           } else {
             document.getElementById('temporizador').innerHTML = 'Tiempo: ' + tiempoRestante + ' segundos';
@@ -152,7 +152,7 @@
       <script>      
         var boton = document.getElementById("miBoton");
         document.getElementById("miBoton").addEventListener("click", function() {
-        window.location.href = "Inicio.html";
+        window.location.href = "Index.html";
         });
         boton.addEventListener("mouseover", function() {
                 boton.style.transition = 'background-color 0.5s, width 0.5s, height 0.5s';
