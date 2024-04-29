@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if  (cardsWon.length === cardArray.length/2) {
         alert("FELICIDADES INGENIERO, NIVELES FINALIZADOS. REGRESANDO AL MENU"); 
         //setInterval(location.reload());
-        window.location.href = "./Inicio.html";
+        window.location.href = "./index.html";
       }    
        // Reiniciar la página
     }
